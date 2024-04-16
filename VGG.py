@@ -7,7 +7,7 @@ import torch.nn.functional as F #Relu, Tanh etc.
 from torch.utils.data import DataLoader
 import torchvision.transforms as transforms
 
-VGG16 = [64,64,"M", 128, 128, "M", 256, 256, 256, "M", 512, 512, 512, "M", 512, 512, 512, "M"]
+VGG16 = [64,64, "M", 128, 128, "M", 256, 256, 256, "M", 512, 512, 512, "M", 512, 512, 512, "M"]
 
 class VGG_net(nn.Module):
     def __init__(self, in_channels = 1, num_classes = 10):

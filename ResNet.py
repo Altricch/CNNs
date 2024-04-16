@@ -35,6 +35,7 @@ class Block(nn.Module):
     def forward(self, x):
         identity = x
         
+        # Inside a layer-block
         x = self.relu(self.bn1(self.conv1(x)))
         x = self.relu(self.bn2(self.conv2(x)))
         x = self.bn3(self.conv3(x))
@@ -43,7 +44,9 @@ class Block(nn.Module):
         if self.identity_downsample is not None:
             identity = self.identity_downsample(identity)
             
+        # Addition of the skip connection
         x += identity
+        
         x = self.relu(x)
         return x
 
@@ -52,6 +55,7 @@ class ResNet(nn.Module):
     def __init__(self, block, layers, image_channels, num_classes):
         super(ResNet, self).__init__()
         self.in_channels = 64
+        # new_image_size = (kernel-1 + p)/s
         self.conv1 = nn.Conv2d(image_channels, 64, kernel_size= 7, stride = 2, padding = 3)
         self.bn1 = nn.BatchNorm2d(64)
         self.relu = nn.ReLU()
@@ -84,7 +88,7 @@ class ResNet(nn.Module):
         return x 
     
     
-    def make_layers(self, block, num_of_residual_block, out_channels, stride):
+    def make_layers(self, num_of_residual_block, out_channels, stride):
         # block (as above), num_of_residual_block (number of times block is used),
         # out_channels (number of channels when done with that layer)
         identity_downsample = None
