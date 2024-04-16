@@ -59,7 +59,7 @@ class PatchEmbedding(nn.Module):
         )
         
         # Number classes -> for MNIST 1 ->  
-        self.cls_token = nn.Parameter(torch.randn(size=(1, in_channels, embed_dim)), requires_grad = True)
+        self.cls_token = nn.Parameter(torch.randn(size=(1, 1, embed_dim)), requires_grad = True)
         # Number of positions is number of patches + 1 (look at diagram from paper)
         self.pos_embed = nn.Parameter(torch.randn(size=(1,num_patches + 1, embed_dim)), requires_grad = True)
         
